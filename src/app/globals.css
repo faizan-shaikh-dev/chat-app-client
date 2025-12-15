@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --font-roboto: var(--font-roboto);
+  --font-poppins: var(--font-poppins);
+
+  --color-green: #16625b;
+  --color-darkgreen: #122d2d;
+  --color-icongreen: #d7efdf;
+  --color-fontgreen: #b8d1cd;
+  --color-hovergreen: #163a3c;
+  --color-bordergreen: #316c63;
+}
