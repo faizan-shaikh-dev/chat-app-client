@@ -5,6 +5,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Link from "next/link";
 
 const schema = yup.object({
   phone: yup
@@ -16,8 +17,8 @@ const schema = yup.object({
     .string()
     .required("Password is required")
     .matches(
-      `^(?=.*[A-Za-z])(?=.*\d).{6,}$`,
-      "Password must be at least 6 characters long and contain letters and numbers"
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{6,}$/,
+      "Password must contain letters, numbers, and a special character"
     ),
 });
 
@@ -87,9 +88,12 @@ const Page = () => {
 
           <span className="text-sm mx-auto">
             Don&apos;t have an account ?{" "}
-            <b className="font-semibold underline underline-offset-2 cursor-pointer">
+            <Link
+              href="/"
+              className="font-semibold underline underline-offset-2 cursor-pointer"
+            >
               Sign Up
-            </b>
+            </Link>
           </span>
         </form>
       </div>
