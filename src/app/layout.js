@@ -1,6 +1,7 @@
 import { Roboto, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/context/AuthContext";
 
 const RobotoSans = Roboto({
   variable: "--font-roboto",
@@ -10,7 +11,7 @@ const RobotoSans = Roboto({
 const PoppinsSans = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
@@ -24,8 +25,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${RobotoSans.variable} ${PoppinsSans.variable} antialiased font-poppins`}
       >
-        <Toaster position="top-right"/>
-        {children}
+        <Toaster position="top-right" />
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
