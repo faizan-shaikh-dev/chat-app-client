@@ -1,20 +1,28 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
+const AuthContext = createContext();
 
-export const AuthContext = createContext();
-
+// For wrapping the main parent component
 export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
+    if (typeof window === "undefined") return null;
+
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
   const router = useRouter();
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, setLoading, router}}>
+    <AuthContext.Provider
+      value={{ router, user, setUser, loading, setLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
+// For using the value in other components
 export const useAuth = () => useContext(AuthContext);
