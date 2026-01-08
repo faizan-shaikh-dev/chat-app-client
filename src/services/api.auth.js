@@ -29,8 +29,8 @@ export const loginUser = async (data, router, setLoading, setUser) => {
     toast.success(msg);
 
     setUser(res.data?.user);
-    localStorage.setItem("User", JSON.stringify(res.data?.user));
-    localStorage.setItem("accsessToken", res.data?.user?.accessToken);
+    localStorage.setItem("user", JSON.stringify(res.data?.user));
+    localStorage.setItem("accessToken", res.data?.user?.accessToken);
     router.push("/chats");
     console.log(error);
     

@@ -1,7 +1,7 @@
 "use client";
 import { CustomInput } from "@/common/CustomInput";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -39,7 +39,12 @@ const Page = () => {
     resolver: yupResolver(schema),
   });
 
-  const { loading, setLoading, router } = useAuth();
+   const { router, loading, setLoading, setUser, user, token } = useAuth();
+    useEffect(() => {
+      if (user && token) {
+        return router.push("/chats");
+      }
+    }, [user, token, router]);
 
   const onSubmit = (data) => {
     registerUser(data, router , setLoading);
@@ -51,7 +56,7 @@ const Page = () => {
       {/* 1 */}
       <div className="w-full hidden bg-linear-to-tl from-icongreen to-fontgreen min-h-[90vh] rounded-2xl relative overflow-clip shadow-xl md:flex items-center justify-center">
         <Image
-          src="/image copy.png"
+          src="/image.png"
           alt="Register Vector"
           priority
           width={200}

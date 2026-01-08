@@ -1,7 +1,7 @@
 "use client";
 import { CustomInput } from "@/common/CustomInput";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -34,7 +34,12 @@ const Page = () => {
     resolver: yupResolver(schema),
   });
 
-  const { router, loading, setLoading, setUser } = useAuth();
+  const { router, loading, setLoading, setUser, user, token } = useAuth();
+  useEffect(() => {
+    if (user && token) {
+      return router.push("/chats");
+    }
+  }, [user, token, router]);
 
   const onSubmit = (data) => {
     loginUser(data, router, setLoading, setUser);
@@ -46,7 +51,7 @@ const Page = () => {
       {/* 1 */}
       <div className="w-full hidden bg-linear-to-tl from-icongreen to-fontgreen min-h-[90vh] rounded-2xl relative overflow-clip shadow-xl md:flex items-center justify-center">
         <Image
-          src="/image.png"
+          src="/image copy.png"
           alt="Login Vector"
           priority
           width={200}
@@ -92,7 +97,7 @@ const Page = () => {
               loading ? "cursor-not-allowed opacity-95" : "cursor-pointer"
             } hover:opacity-95 focus:scale-95 font-semibold tracking-wide text-lg text-fontgreen p-2 rounded-lg w-full mt-2 transition-all duration-300 `}
           >
-            {loading ? "Logging" : "Login"}
+            {loading ? "Logging In..." : "Login"}
           </button>
 
           <span className="text-sm mx-auto">
