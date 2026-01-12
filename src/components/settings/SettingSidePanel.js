@@ -45,7 +45,7 @@ const SettingsSidePanel = () => {
 
   return (
     <div className="flex flex-col gap-5 w-full h-full items-start justify-start">
-      <h2 className="text-3xl font-medium tracking-wide font-poppins ">
+      <h2 className="text-2xl font-medium tracking-wide font-poppins">
         Settings
       </h2>
       {/* Profile */}
@@ -56,11 +56,11 @@ const SettingsSidePanel = () => {
         {/* Profile's Data  */}
         <div className="w-full flex gap-4 items-center justify-center">
           {/* Profile Image  */}
-          <div className="size-16 bg-icongreen rounded-full shrink-0"></div>
+          <div className="size-14 bg-icongreen rounded-full shrink-0"></div>
           {/* Profile's Name  */}
           <div className="flex flex-col w-full font-roboto">
-            <h3 className="text-base font-bold text-gray-300">Shaikh Faizan</h3>
-            <p className="text-sm tracking-wide">Do Some Code</p>
+            <h3 className="text-xl font-medium text-gray-300">Shaikh Faizan</h3>
+            <p className="text-sm">Do Some Code</p>
           </div>
         </div>
         {/* Arrow */}
