@@ -1,26 +1,33 @@
-"use client"
-import { usePathname } from 'next/navigation'
-import React from 'react'
-import StatusSidePanle from './status/StatusSidePanle';
-import ArchiveSidePanel from './archive/ArchiveSidePanel';
-import SettingSidePanel from './settings/SettingSidePanel';
-import ChatSidePanel from './chats/ChatSidePanel';
+"use client";
+import { usePathname, useSearchParams } from "next/navigation";
+import SettingsSidePanel from "./settings/SettingSidePanel";
+import ArchiveSidePanel from "./archive/ArchiveSidePanel";
+import ChatSidePanel from "./chats/ChatSidePanel";
+import NewChatPanel from "./chats/NewChatPanel";
+import NewChatForm from "./chats/NewChatForm";
+import StatusSidePanle from "./status/StatusSidePanle";
 
 const SidePanel = () => {
-    const path = usePathname();
-    
-    
-    if (path === '/chats/status') {
-        return <StatusSidePanle/>
-    }else if(path === '/chats/archive'){
-      return <ArchiveSidePanel/>
-    }else if(path === '/chats/settings'){
-      return <SettingSidePanel/>
-    }else {
-      return <ChatSidePanel/>
-    }
- 
-  
-}
+  const path = usePathname();
+  const searchParams = useSearchParams();
 
-export default SidePanel
+  const mode = searchParams.get("mode");
+  const entry = searchParams.get("entry");
+
+  if (path === "/chats/status") {
+    return <StatusSidePanle />;
+  } else if (path === "/chats/archive") {
+    return <ArchiveSidePanel />;
+  } else if (path === "/chats/settings") {
+    return <SettingsSidePanel />;
+  } else if (mode === "newchat") {
+    if (entry && entry === "single") {
+      return <NewChatForm />;
+    }
+    return <NewChatPanel />;
+  } else {
+    return <ChatSidePanel />;
+  }
+};
+
+export default SidePanel;
